@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WeatherGuard - Extreme Alerts</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+   <!-- CURRENT CONDITIONS SECTION for sahra-->
+  <section class="current-conditions">
+    <h2><i class="fa fa-sun"></i> Current Conditions</h2>
+    <div class="conditions-cards">
+      <div class="condition-card">
+        <span id="temperature">72°F</span>
+        <small>Temperature</small>
+      </div>
+      <div class="condition-card">
+        <span id="humidity">45%</span>
+        <small>Humidity</small>
+      </div>
+      <div class="condition-card">
+        <span id="wind">12mph</span>
+        <small>Wind Speed</small>
+      </div>
+    </div>
+  </section>
+  <section class="alerts-section">
+    <h2>Active Alerts</h2>
+    <div class="alerts-header">
+      <span>Live Updates</span>
+    </div>
+
+    <div class="alert-list" id="alert-list">
+      <div class="alert-card severe">
+        <div class="alert-top">
+          <strong>Severe Thunderstorm Warning</strong>
+          <span class="time">0h remaining</span>
+        </div>
+        <p>Large hail and damaging winds expected. Seek shelter immediately. Lightning may cause power outages.</p>
+        <div class="alert-tags">
+          <span class="tag">THUNDERSTORM</span>
+          <span class="tag">Level 1</span>
+        </div>
+        <div class="location">Denver,CO</div>
+      </div>
+    </div>
+  </section>
+    </body>
+</html>

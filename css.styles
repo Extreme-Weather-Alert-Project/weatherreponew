@@ -1,77 +1,151 @@
-body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-        color: #333;
-    }
-    
-    h1, h2, h3 {
-        text-align: center;
-        margin: 20px 0;
-    }
-    
-    /* Header Styles */
-    header {
-        background-color: #ff4d4d;
-        color: white;
-        padding: 15px 0;
-        text-align: center;
-        font-size: 1.5em;
-    }
-    
-    /* Main Content Styles */
-    main {
-        padding: 20px;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-    
-    /* Weather Alert Card Styles */
-    .alert-card {
-        background-color: white;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 15px;
-        margin: 15px 0;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    
-    .alert-card h3 {
-        color: #ff4d4d;
-        margin-bottom: 10px;
-    }
-    
-    .alert-card p {
-        margin: 5px 0;
-    }
-    
-    /* Safety Tips Section */
-    .safety-tips {
-        background-color: #e6f7ff;
-        border: 1px solid #b3e0ff;
-        border-radius: 8px;
-        padding: 15px;
-        margin: 15px 0;
-    }
-    
-    .safety-tips h3 {
-        color: #007acc;
-        margin-bottom: 10px;
-    }
-    
-    /* Responsive Design */
-    @media (max-width: 768px) {
-        body {
-            font-size: 14px;
-        }
-    
-        .alert-card, .safety-tips {
-            padding: 10px;
-        }
-    }
-      
-    
 
-        
+/*style.css */
+General Reset  */ 
+body {
+    margin:0,
+    padding:0;
+    box-sizing:border-box;
+}
+
+body {
+    font-family:Arial,
+    line-height:1.6;
+    background-color:#f4f4f9;
+    color:#333;
+    padding:20px;
+
+}
+
+.current -condition {
+    background:#ffffff;
+    border-radius:8px;
+    box-shadow:0 px rgba(0,0,0,0.1);
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.current-condition h2 {
+    font-size:1.5rem;
+    margin-bottom:15px;
+    color:#0078d7;
+    display:flex;
+    align-items: centre;
+}
+
+.current-condition h2 i{
+    margin-rignt:10px;
+}
+
+.condition-cards {
+    display:flex;
+    justify-content: space-between;
+}
+
+.condition-card {
+    background:#f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    text-align:centre;
+    flex: 1;
+    margin: 0 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1),
+}
+.condition.cardspan {
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.condition-card small {
+    font-size: 0.9rem;
+    color:#666;
+}
+.alerts-section {
+    background:#ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+.alerts-section h2 {
+    Font-size:15rem;
+    margin-bottom:15px;
+    color:#d9534f;
+
+}
+.alerts-geader{
+    font-size:1rem;
+    font-weight:bold;
+    color:#555;
+    margin-bottom:15px;
+}
+.alert-list {
+    display:flex;
+    flex-direction:column;
+    gap: 15px;
+}
+.alert-card {
+    background:#fefefe;
+    border-left: 5px #d9534f
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(o,0,0,0.1);
+}
+.alert-card severe {
+    border-left-color:#d9534f;
+}
+.alert-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.alert-top srong {
+    font-size: 1.1rem;
+    color:#d9534f;
+}
+
+.alert-top .time {
+    font-size: 0.9rem;
+    color:#666;
+}
+
+.alert-card p {
+    font-size: 0.9rem;
+    color:#555;
+    margin-bottom: 10px;
+}
+
+.alert-tags {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.alert-tags .tag {
+    backgroud:#0078d7;
+    color:#fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+}
+.location {
+    font-size: 0.9rem;
+    color:#666;
+    font-style: italic;
+}
+@media (max-width: 768px) {
+    .condition-cards{
+        flex-direction:column;
+        gap: 10px;
+    }
+}
+.condition-card {
+    margin: 0;
+}
+.alert-list {
+    gap: 10px;
+}
+
     

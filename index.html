@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-  <div class="overlay"></div>
+  <div id="background-overlay"></div>
   <header class="header-content">
     <div class="top-bar">
       <div class="logo-container">
@@ -42,10 +42,6 @@
   <section class="current-conditions">
     <h2><i class="fa fa-sun"></i> Current Conditions</h2>
   
-    <button id="unitToggle" type="button" style="margin-bottom: 1rem;">
-      Switch to °C
-    </button>
-  
     <div class="conditions-cards">
       <div class="condition-card">
         <span id="temperature">--</span>
@@ -59,16 +55,22 @@
         <span id="wind">--</span>
         <small>Wind Speed</small>
       </div>
+      
+      <!-- Unit Toggle Card to  -->
+      <div class="condition-card unit-toggle-card">
+        <button id="unitToggle">Switch to °C</button>
+      </div>
     </div>
   </section>
+  
 
   <!-- ALERT SECTION -->
   <section class="alerts-section">
-    <h2>Active Alerts</h2>
     <div class="alerts-header">
-      <span>Live Updates</span>
+      <h2>Active Alerts</h2>
+      <span class="live-updates">Live Updates</span>
     </div>
-    <div class="alert-list" id="alert-list"></div>
+    
   </section>
 
   <script src="js/script.js"></script>

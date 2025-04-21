@@ -199,7 +199,7 @@ searchBtn.addEventListener("click", async () => {
 });
 
 // 🌡️ Toggle between °F and °C
-unitToggle.addEventListener("click", async () => {
+unitToggle.addEventListener("mouseover", async () => {
   currentUnit = currentUnit === "F" ? "C" : "F";
   unitToggle.textContent = `Switch to °${currentUnit === "F" ? "C" : "F"}`;
 

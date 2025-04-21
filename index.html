@@ -9,75 +9,70 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-  <div class="overlay"></div>
-    <header class="header-content">
-       <div class="weather">
-        <div class="logo-container">
-          <i class="fa-solid fa-shield-halved logo" aria-hidden="true"></i>
-           <h6 class="app-title">WeatherGuard</h6>
-            </div>
-        <div class="aboutUs">
-             <a href="about.html">About us</a>
-          <button id="darkModeToggle" class="dark-mode-toggle">
-            <i id="darkModeIcon" class="fas fa-sun"></i>
-          </button>
-          </div>
-        </div>
-        <h2>Stay Safe. Stay Informed.</h2>
-        <p>Real-time extreme weather alerts for your location.</p>
-        <form class="search" role="search">
-         <label for="cityInput" class="search-label">
-           <div class="input-container">
-             <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
-            <input id="cityInput" type="text" placeholder="Enter location..." aria-label="Enter location">
-           </div>
-            </label>
-            <button id="btn" type="button">
-                <i class="fa-solid fa-location-dot"></i>
-                Detect
-            </button>
-        </form>
-    </header>
-</body>
-</html>
-   <!-- CURRENT CONDITIONS SECTION for sahra-->
+  <div id="background-overlay"></div>
+  <header class="header-content">
+    <div class="top-bar">
+      <div class="logo-container">
+        <i class="fa-solid fa-shield-halved logo"></i>
+        <span class="app-title">WeatherGuard</span>
+      </div>
+      <div class="about-link">
+        <a href="about.html">About us</a>
+        <button id="darkModeToggle" class="dark-mode-toggle">
+          <i id="darkModeIcon" class="fas fa-sun"></i>
+        </button>
+      </div>
+    </div>
+    
+    <h2>Stay Safe. Stay Informed.</h2>
+    <p>Real-time extreme weather alerts for your location.</p>
+    <form class="hero-search" role="search">
+      <div class="search-bar">
+        <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+        <input id="cityInput" type="text" placeholder="Enter location..." aria-label="Enter location">
+        <button id="detectBtn" type="button">
+          <i class="fa-solid fa-location-dot"></i> Detect
+        </button>
+      </div>
+    </form>
+    
+  </header>
+
+  <!-- CURRENT CONDITIONS SECTION -->
   <section class="current-conditions">
     <h2><i class="fa fa-sun"></i> Current Conditions</h2>
+  
     <div class="conditions-cards">
       <div class="condition-card">
-        <span id="temperature">72°F</span>
+        <span id="temperature">--</span>
         <small>Temperature</small>
       </div>
       <div class="condition-card">
-        <span id="humidity">45%</span>
+        <span id="humidity">--</span>
         <small>Humidity</small>
       </div>
       <div class="condition-card">
-        <span id="wind">12mph</span>
+        <span id="wind">--</span>
         <small>Wind Speed</small>
       </div>
-    </div>
-  </section>
-  <section class="alerts-section">
-    <h2>Active Alerts</h2>
-    <div class="alerts-header">
-      <span>Live Updates</span>
-    </div>
-
-    <div class="alert-list" id="alert-list">
-      <div class="alert-card severe">
-        <div class="alert-top">
-          <strong>Severe Thunderstorm Warning</strong>
-          <span class="time">0h remaining</span>
-        </div>
-        <p>Large hail and damaging winds expected. Seek shelter immediately. Lightning may cause power outages.</p>
-        <div class="alert-tags">
-          <span class="tag">THUNDERSTORM</span>
-          <span class="tag">Level 1</span>
-        </div>
-        <div class="location">Denver,CO</div>
+      
+      <!-- Unit Toggle Card to  -->
+      <div class="condition-card unit-toggle-card">
+        <button id="unitToggle">Switch to °C</button>
       </div>
     </div>
   </section>
-    </body>
+  
+
+  <!-- ALERT SECTION -->
+  <section class="alerts-section">
+    <div class="alerts-header">
+      <h2>Active Alerts</h2>
+      <span class="live-updates">Live Updates</span>
+    </div>
+    
+  </section>
+
+  <script src="js/script.js"></script>
+</body>
 </html>

@@ -1,13 +1,17 @@
 
-* {
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to bottom, #e0f2ff, #ffffff);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: url(images2/weather-image.avif);
+  background-size: cover;
+
+  background-position: center;
+  background-repeat: no-repeat;
   color: #333;
   line-height: 1.6;
   transition: background-color 0.4s ease, color 0.4s ease;
@@ -23,6 +27,7 @@ body.dark-mode {
   text-align: center;
   padding: 2rem 1rem;
   transition: background-color 0.4s ease;
+  color: white;
 }
 
 .logo-container {
@@ -110,33 +115,39 @@ body.dark-mode .search-bar {
   padding: 0 2rem;
 }
 
-
 /* === CURRENT CONDITIONS SECTION === */
 .current-conditions {
-  background-color: rgba(20, 20, 30, 0.85);
-  max-width: 900px;
+  background-color: rgba(0, 0, 0, 0.85);
+  max-width: 1200px;
   margin: 2rem auto;
-  padding: 2rem;
+  height: 200px;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   text-align: center;
   backdrop-filter: blur(12px);
+  padding: 20px;
 }
-.current-conditions
+
+.text-current {
+  text-align: start;
+  color:white;
+  font-size: 1.2rem;
+}
 .conditions-cards {
+  padding: 10px;
   display: flex;
+  width: 100%;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-top: 1rem;
+  align-items: center;
+  gap: 1rem;
+  overflow: hidden;
 }
 
 .condition-card {
-  background-color: rgba(255, 255, 255, 0.05); /* Frosted dark card */
-  padding: 1.5rem;
+  background-color: rgba(30, 28, 28, 0.05); /* Frosted dark card */
+  padding: 10px;
+  height: 100%;
   border-radius: 12px;
-  min-width: 140px;
-  max-width: 180px;
   flex: 1;
   text-align: center;
   color: white;
@@ -146,7 +157,7 @@ body.dark-mode .search-bar {
 
 /* BIG NUMBERS */
 .condition-card span {
-  font-size: 2.6rem;  /* ⬅️ Bigger size for number */
+  font-size: 2.6rem; /* ⬅️ Bigger size for number */
   font-weight: 700;
   display: block;
   margin-bottom: 0.3rem;
@@ -157,16 +168,14 @@ body.dark-mode .search-bar {
   color: #ccc;
 }
 
-
-
 /* === ALERTS SECTION === */
 .alerts-section {
-  background-color: rgba(20, 20, 30, 0.85); /* dark semi-transparent */
+  background-color: #17171fd9; /* dark semi-transparent */
   margin: 2rem auto;
   padding: 2rem;
   border-radius: 16px;
-  max-width: 900px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  max-width: 1200px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(12px);
   color: white;
 }
@@ -205,11 +214,19 @@ body.dark-mode .search-bar {
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.4); opacity: 0.6; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
-
 
 /* === RESPONSIVE === */
 @media (max-width: 768px) {

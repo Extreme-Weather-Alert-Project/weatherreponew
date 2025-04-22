@@ -1,149 +1,248 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8"/>
-        <meta name="viewport"
-        content="width=device-width, initial-scale=1.0"/>
-        <title>About us Weather Alert</title>
-        
-        <style>
-            body {margin: 0;
-            font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(to bottom, #131414, #131414, #131414);
-      color: #fff;}
-
-      header 
-      {padding: 2rem;
-        text-align: center;
-        background: rgba(0, 0, 0, 0.5);}
-        header h1 
-        {margin: 0;
-        font-size: 2.5 rem;}
-
-        section {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: rgba(16, 86, 107, 0.5);
-            border-radius: 10px;
-        }
-
-        section h2 {
-            font-size: 1.8 rem;
-            margin-bottom: 1rem;
-            color: #00d4ff;
-        }
-
-        section p {
-            line-height: 1.6;
-        }
-        .team {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .member {
-            text-align: center;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 8px;
-        }
-
-        .member img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 0.5rem;
-            border: 2px solid #00d4ff;
-        }
-
-        .member h3 {
-            margin: 0.5rem 0 0.2rem;
-            font-size: 1.2rem;
-            color: #fff;
-        }
-
-        .member p {
-            font-size: 0.9 rem;
-            color: #ccc
-        }
-
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.5);
-            font-size: 0.9rem;
-            color: #ccc;
-        }
-        </style>
-    </head>
-    <body>
-        <header>
-            <h1>About Weather Guard</h1>
-            <p>Stay Safe. Stay Informed.></p>
-        </header>
-
-        <section>
-            <h2>Our Mission</h2>
-            <p>
-                WeatherGuard is dedicated to providing real-time extreme weather alerts 
-                to help communities stay safe and informed. With dynamic updates and detailed weather conditions, 
-                we aim to deliver accurate and timely information tailored to your location.
-
-            </p>
-        </section>
-
-        <section>
-
-        <h2>Our Platform</h2>
-        <p>
-            Our platform delivers current temperature, humidity, and wind speed, 
-            along with instant notifications of any active weather alerts such as thunderstorms, 
-            floods, or high winds. Designed with user experience in mind, WeatherGuard 
-            helps you plan and respond effectively to changing weather conditions.
-
-        </p>
-    </section>
-
-    <section>
-        <h2>Our Team</h2>
-        <div class = "team">
-            <div class = "member">
-                <img src="#" alt="Team member photo">
-                <h3>Sahra Mayow</h3>
-                <p>Java script and API</p>
-            </div>
-
-            <div class = "member">
-                <img src="#" alt="Team member photo">
-                <h3>Bilal Addow</h3>
-                <p>About us Page</p>
-            </div>
-
-            <div class = "member">
-                <img src="#" alt="Team member photo">
-                <h3>Hafsa</h3>
-                <p><HTML></HTML></p>
-            </div>
-
-            <div class = "member">
-                <img src="#" alt="Team member photo">
-                <h3>Ikram</h3>
-                <p>CSS</p>
-            </div>
-
-        </div>
-    </section>
-
-    <footer>
-        &copy; 2025 WeatherGuard Team. All rights reserved.
-    </footer>
-
-    </body>
-              
-    
-</html>
-
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: url(weather-image.avif);
+    background-size: cover;
+  
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #333;
+    line-height: 1.6;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+  
+  /* === DARK MODE for later === */
+  body.dark-mode {
+    background: linear-gradient(to bottom, #0f172a, #1e293b);
+    color: #f0f0f0;
+  }
+  
+  .header-content {
+    text-align: center;
+    padding: 2rem 1rem;
+    transition: background-color 0.4s ease;
+    color: white;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1rem;
+  }
+  
+  .logo {
+    font-size: 1.6rem;
+    color: #0077ff;
+    display: flex;
+    align-items: center;
+  }
+  
+  .app-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: inherit;
+    margin-top: 2px;
+  }
+  
+  .hero-search {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+    width: 100%;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  body.dark-mode .search-bar {
+    background-color: #334155;
+    border-color: #475569;
+  }
+  
+  .search-bar input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 1rem;
+    color: inherit;
+  }
+  
+  .search-bar button {
+    background-color: #0077ff;
+    color: white;
+    border: none;
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .search-bar button:hover {
+    background-color: #005fcc;
+    transform: scale(1.05);
+  }
+  
+  .search-icon {
+    color: #666;
+    font-size: 1rem;
+  }
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+  }
+  
+  /* === CURRENT CONDITIONS SECTION === */
+  .current-conditions {
+    background-color: rgba(0, 0, 0, 0.85);
+    max-width: 1200px;
+    margin: 2rem auto;
+    height: 200px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    backdrop-filter: blur(12px);
+    padding: 20px;
+  }
+  
+  .text-current {
+    text-align: start;
+    color:white;
+    font-size: 1.2rem;
+  }
+  .conditions-cards {
+    padding: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    overflow: hidden;
+  }
+  
+  .condition-card {
+    background-color: rgba(30, 28, 28, 0.05); /* Frosted dark card */
+    padding: 10px;
+    height: 100%;
+    border-radius: 12px;
+    flex: 1;
+    text-align: center;
+    color: white;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* BIG NUMBERS */
+  .condition-card span {
+    font-size: 2.6rem; /* ⬅️ Bigger size for number */
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  
+  .condition-card small {
+    font-size: 0.9rem;
+    color: #ccc;
+  }
+  
+  /* === ALERTS SECTION === */
+  .alerts-section {
+    background-color: #17171fd9; /* dark semi-transparent */
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 16px;
+    max-width: 1200px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    color: white;
+  }
+  
+  /* Header with 'Active Alerts' and Live badge */
+  .alerts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .alerts-header h2 {
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  
+  /* === LIVE UPDATES === */
+  .live-updates {
+    font-size: 0.95rem;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  
+  /* Animated green dot next to 'Live Updates' */
+  .dot {
+    height: 8px;
+    width: 8px;
+    background-color: #22c55e; /* Tailwind green-500 */
+    border-radius: 50%;
+    animation: pulse 1.2s infinite ease-in-out;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.4);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .conditions-cards {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .search-bar {
+      flex-direction: column;
+      align-items: stretch;
+      border-radius: 20px;
+    }
+  
+    .search-bar input,
+    .search-bar button {
+      width: 100%;
+    }
+  }
+  

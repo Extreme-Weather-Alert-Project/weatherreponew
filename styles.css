@@ -1,231 +1,184 @@
-
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to bottom, #e0f2ff, #ffffff);
-  color: #333;
-  line-height: 1.6;
-  transition: background-color 0.4s ease, color 0.4s ease;
-}
-
-/* === DARK MODE for later === */
-body.dark-mode {
-  background: linear-gradient(to bottom, #0f172a, #1e293b);
-  color: #f0f0f0;
-}
-
-.header-content {
-  text-align: center;
-  padding: 2rem 1rem;
-  transition: background-color 0.4s ease;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 1rem;
-}
-
-.logo {
-  font-size: 1.6rem;
-  color: #0077ff;
-  display: flex;
-  align-items: center;
-}
-
-.app-title {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: inherit;
-  margin-top: 2px;
-}
-
-.hero-search {
-  display: flex;
-  justify-content: center;
-  margin-top: 1.5rem;
-}
-
-.search-bar {
-  display: flex;
-  align-items: center;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 50px;
-  padding: 0.5rem 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  max-width: 500px;
-  width: 100%;
-  gap: 0.5rem;
-  transition: background-color 0.3s ease;
-}
-
-body.dark-mode .search-bar {
-  background-color: #334155;
-  border-color: #475569;
-}
-
-.search-bar input {
-  flex: 1;
-  border: none;
-  background: transparent;
-  outline: none;
-  font-size: 1rem;
-  color: inherit;
-}
-
-.search-bar button {
-  background-color: #0077ff;
-  color: white;
-  border: none;
-  padding: 0.4rem 1rem;
-  border-radius: 50px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.95rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.search-bar button:hover {
-  background-color: #005fcc;
-  transform: scale(1.05);
-}
-
-.search-icon {
-  color: #666;
-  font-size: 1rem;
-}
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2rem;
-}
-
-
-/* === CURRENT CONDITIONS SECTION === */
-.current-conditions {
-  background-color: rgba(20, 20, 30, 0.85);
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  text-align: center;
-  backdrop-filter: blur(12px);
-}
-.current-conditions
-.conditions-cards {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-top: 1rem;
-}
-
-.condition-card {
-  background-color: rgba(255, 255, 255, 0.05); /* Frosted dark card */
-  padding: 1.5rem;
-  border-radius: 12px;
-  min-width: 140px;
-  max-width: 180px;
-  flex: 1;
-  text-align: center;
-  color: white;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
-}
-
-/* BIG NUMBERS */
-.condition-card span {
-  font-size: 2.6rem;  /* ⬅️ Bigger size for number */
-  font-weight: 700;
-  display: block;
-  margin-bottom: 0.3rem;
-}
-
-.condition-card small {
-  font-size: 0.9rem;
-  color: #ccc;
-}
-
-
-
-/* === ALERTS SECTION === */
-.alerts-section {
-  background-color: rgba(20, 20, 30, 0.85); /* dark semi-transparent */
-  margin: 2rem auto;
-  padding: 2rem;
-  border-radius: 16px;
-  max-width: 900px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-  backdrop-filter: blur(12px);
-  color: white;
-}
-
-/* Header with 'Active Alerts' and Live badge */
-.alerts-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.alerts-header h2 {
-  font-size: 1.3rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-/* === LIVE UPDATES === */
-.live-updates {
-  font-size: 0.95rem;
-  color: #ccc;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-/* Animated green dot next to 'Live Updates' */
-.dot {
-  height: 8px;
-  width: 8px;
-  background-color: #22c55e; /* Tailwind green-500 */
-  border-radius: 50%;
-  animation: pulse 1.2s infinite ease-in-out;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.4); opacity: 0.6; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-
-/* === RESPONSIVE === */
-@media (max-width: 768px) {
-  .conditions-cards {
-    flex-direction: column;
-    align-items: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
-
-  .search-bar {
-    flex-direction: column;
-    align-items: stretch;
-    border-radius: 20px;
+  
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    line-height: 1.6;
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
-
-  .search-bar input,
-  .search-bar button {
+  
+  #background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    background-image: url("image/mountain-1.avif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    transition: background-image 0.5s ease-in-out;
   }
+
+  /* #background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 0.6s ease-in-out;
 }
+ */
+  
+  .header-content {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: white;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1rem;
+  }
+  
+  .logo {
+    font-size: 1.6rem;
+    color: #0077ff;
+  }
+  
+  .app-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+  
+  .hero-search {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #343030;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    max-width: 500px;
+    width: 100%;
+    gap: 0.5rem;
+  }
+  
+  .search-bar input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 1rem;
+    color: white;
+  }
+  
+  .search-bar button {
+    background-color: #0077ff;
+    color: white;
+    border: none;
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.95rem;
+  }
+  
+  .search-icon {
+    color: #666;
+  }
+  
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+  }
+  
+  .current-conditions {
+    background-color: rgba(0, 0, 0, 0.8);
+    margin: 2rem auto;
+    max-width: 1200px;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+  }
+  .current-conditions h2 {
+    text-align: left;
+    margin-bottom: 1rem;
+  }
+  
+  .conditions-cards {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .condition-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 12px;
+    flex: 1;
+    text-align: center;
+    min-width: 120px;
+  }
+  
+  .condition-card span {
+    font-size: 2.6rem;
+    font-weight: bold;
+  }
+  
+  .condition-card small {
+    font-size: 0.9rem;
+    color: #ccc;
+  }
+  
+  .alerts-section {
+    background-color: rgba(0, 0, 0, 0.85);
+    margin: 2rem auto;
+    padding: 2rem;
+    max-width: 1200px;
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+  }
+  
+  .alerts-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .dot {
+    width: 8px;
+    height: 8px;
+    background-color: #22c55e;
+    border-radius: 50%;
+    animation: pulse 1.2s infinite ease-in-out;
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.6; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  

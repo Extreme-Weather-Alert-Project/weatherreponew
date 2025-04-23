@@ -10,6 +10,7 @@
 </head>
 <body>
   <div id="background-overlay"></div>
+
   <header class="header-content">
     <div class="top-bar">
       <div class="logo-container">
@@ -30,47 +31,32 @@
       <div class="search-bar">
         <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
         <input id="cityInput" type="text" placeholder="Enter location..." aria-label="Enter location">
-        <button id="detectBtn" type="button">
-          <i class="fa-solid fa-location-dot"></i> Detect
+        <button id="searchBtn" type="button">
+          <i class="fa-solid fa-location-dot"></i> Search
         </button>
       </div>
     </form>
     
   </header>
 
-  <!-- CURRENT CONDITIONS SECTION -->
   <section class="current-conditions">
     <h2><i class="fa fa-sun"></i> Current Conditions</h2>
-  
     <div class="conditions-cards">
-      <div class="condition-card">
-        <span id="temperature">--</span>
-        <small>Temperature</small>
-      </div>
-      <div class="condition-card">
-        <span id="humidity">--</span>
-        <small>Humidity</small>
-      </div>
-      <div class="condition-card">
-        <span id="wind">--</span>
-        <small>Wind Speed</small>
-      </div>
-      
-      <!-- Unit Toggle Card to  -->
+      <div class="condition-card"><span id="temperature">--</span><small>Temperature</small></div>
+      <div class="condition-card"><span id="humidity">--</span><small>Humidity</small></div>
+      <div class="condition-card"><span id="wind">--</span><small>Wind Speed</small></div>
       <div class="condition-card unit-toggle-card">
         <button id="unitToggle">Switch to °C</button>
       </div>
     </div>
   </section>
-  
 
-  <!-- ALERT SECTION -->
   <section class="alerts-section">
     <div class="alerts-header">
       <h2>Active Alerts</h2>
-      <span class="live-updates">Live Updates</span>
+      <span class="live-updates">Live Updates <span class="dot"></span></span>
     </div>
-    
+    <div id="alertsContainer"></div>
   </section>
 
   <script src="js/script.js"></script>

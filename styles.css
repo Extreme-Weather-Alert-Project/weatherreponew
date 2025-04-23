@@ -66,12 +66,13 @@
     display: flex;
     justify-content: center;
     margin-top: 1.5rem;
+  
   }
   
   .search-bar {
     display: flex;
     align-items: center;
-    background-color: #ffffff;
+    background-color: #343030;
     border: 1px solid #ccc;
     border-radius: 50px;
     padding: 0.5rem 1rem;
@@ -86,7 +87,7 @@
     background: transparent;
     outline: none;
     font-size: 1rem;
-    color: #000;
+    color: white;
   }
   
   .search-bar button {

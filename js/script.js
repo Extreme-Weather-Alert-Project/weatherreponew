@@ -7,9 +7,8 @@ const humidity = document.getElementById("humidity");
 const wind = document.getElementById("wind");
 const alertsContainer = document.querySelector(".alerts-section");
 
-// 💡 KU GELI SAWIRADA HOOSE FAYLKAAGA "images" ama "assets" folder
-const goodWeatherBg = "image/normal-weather.avif";   // ← Sawirka cimilada wanaagsan
-const badWeatherBg = "image/cold-weather.webp";       // ← Sawirka roobka/barafka/duufaanta
+const goodWeatherBg = "image/weather-image.avif";   
+const badWeatherBg = "image/weather-12.jpeg";       
 
 function getHoursRemaining(expires) {
   const expiryTime = new Date(expires);
@@ -38,7 +37,7 @@ searchBtn.addEventListener("click", () => {
       humidity.textContent = data.current.humidity + "%";
       wind.textContent = data.current.wind_kph + " kph";
 
-      // 🔥 Xaalado lagu tixgelin karo "xun"
+      
       const badConditions = ["thunder", "storm", "rain", "snow", "blizzard", "hurricane", "tornado", "freezing"];
       const isBadByCondition = badConditions.some(cond => conditionText.includes(cond));
       const isTooCold = tempC < 10;

@@ -1,0 +1,8 @@
+document.querySelector(".hero-search").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const cityInput = document.getElementById("cityInput").value.trim();
+  if (cityInput) {
+    localStorage.setItem("lastSearchedCity", cityInput);
+    window.location.href = `index.html?city=${encodeURIComponent(cityInput)}`;
+  }
+});

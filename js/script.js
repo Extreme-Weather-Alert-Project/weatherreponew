@@ -9,8 +9,9 @@ const alertsContainer = document.querySelector(".alerts-section");
 
 const cityName = document.querySelector("#cityName");
 
-// const goodWeatherBg = "image/weather-image.avif";
-// const badWeatherBg = "image/weather-12.jpeg";
+// Background switching (optional)
+const goodWeatherBg = "image/weather-image.avif";
+const badWeatherBg = "image/weather-12.jpeg";
 
 function getHoursRemaining(expires) {
   const expiryTime = new Date(expires);
@@ -21,87 +22,81 @@ function getHoursRemaining(expires) {
 
 function updateBackground(isBadWeather) {
   const bgUrl = isBadWeather ? badWeatherBg : goodWeatherBg;
-  document.getElementById(
-    "background-overlay"
-  ).style.backgroundImage = `url('${bgUrl}')`;
+  document.getElementById("background-overlay").style.backgroundImage = `url('${bgUrl}')`;
 }
 
-searchBtn.addEventListener("click", (e) => {
+document.querySelector(".hero-search").addEventListener("submit", (e) => {
   e.preventDefault(); // Prevent form submission
+  alertsContainer.innerHTML = ""; // Clear previous alerts
 
   const city = cityInput.value.trim();
   if (!city) return;
 
   // 🎯 CURRENT WEATHER
   fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`)
-    .then((res) => res.json())
+    .then((res) => {
+      if (!res.ok) throw new Error("Weather API error");
+      return res.json();
+    })
     .then((data) => {
       const tempC = data.current.temp_c;
-
-      console.log(data);
-
       const conditionText = data.current.condition.text.toLowerCase();
 
-      const cityNameText = data.location.country;
-      console.log(cityNameText);
-
-      cityName.textContent = `${cityNameText}`;
+      const cityNameText = `${data.location.name}, ${data.location.country}`;
+      cityName.textContent = cityNameText;
       temperature.textContent = `${tempC}°C`;
       humidity.textContent = data.current.humidity + "%";
       wind.textContent = data.current.wind_kph + " kph";
 
-      if (tempC > 10) {
-        console.log("Good Weather");
-      } else if (tempC < 10) {
-        console.log("Bad Weather");
-      } else {
-        console.log("Bad Weather");
-      }
+      updateBackground(tempC < 10); // true = bad weather
 
-      // console.log(cityInput.value);
-      cityInput.value = ""; 
-      
+      cityInput.value = "";
     })
     .catch((err) => {
       console.error("Weather fetch error:", err);
-      alertsContainer.innerHTML = `<div class="alert danger">⚠️ Error fetching weather data.</div>`;
+      alertsContainer.innerHTML = `<div class="alert alert-critical">⚠️ Error fetching weather data.</div>`;
     });
 
   // 📢 WEATHER ALERTS
   fetch(`https://api.weatherapi.com/v1/alerts.json?key=${apiKey}&q=${city}`)
-    .then((res) => res.json())
+    .then((res) => {
+      if (!res.ok) throw new Error("Alert API error");
+      return res.json();
+    })
     .then((data) => {
       const alerts = data.alerts?.alert || [];
       alertsContainer.innerHTML = "";
 
       if (alerts.length === 0) {
         alertsContainer.innerHTML = `
-        <div class="box">
-          <div class="clear">
-           <i class="fa fa-check" aria-hidden="true"></i>
-           
-           
+          <div class="box">
+            <div class="clear">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+            <p>All Clear</p>
           </div>
-           <p>All Clear</p>
-        </div>
         `;
       } else {
         alerts.forEach((alert) => {
           const alertBox = document.createElement("div");
-          const severity = alert.severity?.toLowerCase() || "info";
+          const severity = alert.severity?.toLowerCase() || "unknown";
           const timeRemaining = alert.expires
             ? `${getHoursRemaining(alert.expires)}h remaining`
             : "";
 
-          let className = "info";
-          if (severity.includes("severe") || severity.includes("extreme")) {
-            className = "danger";
+          // 🟡 wuxu display dhahayaa weather severity based on color----look css
+          //
+          let className = "alert-low";
+          if (severity.includes("extreme")) {
+            className = "alert-critical";
+          } else if (severity.includes("severe")) {
+            className = "alert-high";
           } else if (
             severity.includes("moderate") ||
             severity.includes("watch") ||
             severity.includes("advisory")
           ) {
-            className = "warning";
+            className = "alert-moderate";
           }
 
           alertBox.className = `alert ${className}`;
@@ -111,14 +106,15 @@ searchBtn.addEventListener("click", (e) => {
               <p>${alert.desc}</p>
               <p><small>Region: ${alert.areaDesc}</small></p>
             </div>
-            <div class="time-remaining">${timeRemaining}</div>
+            ${timeRemaining ? `<div class="time-remaining">${timeRemaining}</div>` : ""}
           `;
+
           alertsContainer.appendChild(alertBox);
         });
       }
     })
     .catch((error) => {
       console.error("Alerts fetch error:", error);
-      alertsContainer.innerHTML = `<div class="alert danger">⚠️ Unable to fetch alerts at the moment.</div>`;
+      alertsContainer.innerHTML = `<div class="alert alert-critical">⚠️ Unable to fetch alerts at the moment.</div>`;
     });
 });

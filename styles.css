@@ -211,4 +211,41 @@
       opacity: 1;
     }
   }
+  /* ---------------- ALERT STYLING ------------------ */
+
+.alert {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  color: white;
+  line-height: 1.5;
+}
+
+/* Severity colors from yellow to red */
+.alert-low {
+  background-color: #facc15; /* Yellow */
+  color: #000;
+}
+
+.alert-moderate {
+  background-color: #f97316; /* Orange */
+}
+
+.alert-high {
+  background-color: #ea580c; /* Dark Orange */
+}
+
+.alert-critical {
+  background-color: #dc2626; /* Red */
+}
+
+/* Optional: time remaining inside alert */
+.time-remaining {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #eee;
+}
+
   

@@ -6,12 +6,76 @@ const temperature = document.getElementById("temperature");
 const humidity = document.getElementById("humidity");
 const wind = document.getElementById("wind");
 const alertsContainer = document.querySelector(".alerts-section");
-
 const cityName = document.querySelector("#cityName");
 
-// Background switching (optional)
 const goodWeatherBg = "image/weather-image.avif";
 const badWeatherBg = "image/weather-12.jpeg";
+
+const safetyData = {
+  "Severe Thunderstorm Warning": [
+    "Stay indoors and avoid windows.",
+    "Unplug electrical appliances to prevent power surges.",
+    "Avoid using water and landline phones during the storm.",
+    "Stay away from tall objects and isolated trees if outdoors."
+  ],
+  "Flash Flood Warning": [
+    "Move to higher ground immediately.",
+    "Avoid walking or driving through floodwaters.",
+    "Turn around, don't drown—just 6 inches of water can knock you down.",
+    "Listen to emergency broadcasts for updates."
+  ],
+  "Tornado Warning": [
+    "Take shelter in a basement or interior room without windows.",
+    "Avoid mobile homes; seek sturdy shelter.",
+    "Protect yourself with a mattress or heavy blanket.",
+    "Listen to weather alerts and local authorities."
+  ],
+  "Hurricane Warning": [
+    "Evacuate if instructed by local officials.",
+    "Stock up on food, water, and emergency supplies.",
+    "Secure windows and outdoor objects.",
+    "Stay indoors and avoid coastal areas."
+  ],
+  "Winter Storm Warning": [
+    "Stay indoors and keep warm with extra layers or blankets.",
+    "Avoid travel unless absolutely necessary.",
+    "Keep a flashlight, food, and water in case of power outages.",
+    "Be cautious of icy roads and sidewalks."
+  ],
+  "Excessive Heat Warning": [
+    "Stay hydrated and drink plenty of water.",
+    "Avoid outdoor activity during peak heat (10 AM - 4 PM).",
+    "Wear light, loose-fitting clothing.",
+    "Check on elderly and vulnerable neighbors."
+  ],
+  "High Wind Warning": [
+    "Secure outdoor objects and furniture.",
+    "Avoid windows and stay indoors.",
+    "Be cautious of falling debris or tree branches.",
+    "Avoid unnecessary driving, especially high-profile vehicles."
+  ],
+  "Blizzard Warning": [
+    "Stay indoors and avoid travel.",
+    "Prepare an emergency kit with food, water, and medicine.",
+    "Keep extra blankets and warm clothing available.",
+    "Avoid overexertion when shoveling snow."
+  ],
+  "Ice Storm Warning": [
+    "Stay off roads unless absolutely necessary.",
+    "Be prepared for power outages.",
+    "Avoid trees and power lines which may fall due to ice.",
+    "Use caution when walking—sidewalks may be slippery."
+  ],
+  "Air Quality Alert": [
+    "Avoid prolonged outdoor exertion.",
+    "Keep windows closed and use air purifiers indoors.",
+    "Wear a mask if air quality is very poor.",
+    "Check air quality index before planning outdoor activities."
+  ]
+};
+
+let currentTempC = null;
+let currentWindKph = null;
 
 function getHoursRemaining(expires) {
   const expiryTime = new Date(expires);
@@ -20,36 +84,38 @@ function getHoursRemaining(expires) {
   return Math.ceil(diff / (1000 * 60 * 60));
 }
 
-function updateBackground(isBadWeather) {
-  const bgUrl = isBadWeather ? badWeatherBg : goodWeatherBg;
-  document.getElementById("background-overlay").style.backgroundImage = `url('${bgUrl}')`;
-}
+// function updateBackground(isBadWeather) {
+//   const bgUrl = isBadWeather ? badWeatherBg : goodWeatherBg;
+//   document.getElementById("background-overlay").style.backgroundImage = `url('${bgUrl}')`;
+// }
 
+// Submit search form
 document.querySelector(".hero-search").addEventListener("submit", (e) => {
-  e.preventDefault(); // Prevent form submission
-  alertsContainer.innerHTML = ""; // Clear previous alerts
+  e.preventDefault();
+  alertsContainer.innerHTML = "";
 
   const city = cityInput.value.trim();
   if (!city) return;
 
-  // 🎯 CURRENT WEATHER
+  // Fetch current weather
   fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`)
     .then((res) => {
       if (!res.ok) throw new Error("Weather API error");
       return res.json();
     })
     .then((data) => {
-      const tempC = data.current.temp_c;
-      const conditionText = data.current.condition.text.toLowerCase();
+      currentTempC = data.current.temp_c;
+      currentWindKph = data.current.wind_kph;
 
-      const cityNameText = `${data.location.name}, ${data.location.country}`;
-      cityName.textContent = cityNameText;
-      temperature.textContent = `${tempC}°C`;
+      const tempF = (currentTempC * 9/5) + 32;
+      const windMph = currentWindKph / 1.609;
+
+      cityName.textContent = `${data.location.name}, ${data.location.country}`;
+      temperature.textContent = `${tempF.toFixed(1)}°F`; // Default to Fahrenheit
       humidity.textContent = data.current.humidity + "%";
-      wind.textContent = data.current.wind_kph + " kph";
+      wind.textContent = `${windMph.toFixed(1)} mph`;    // Default to mph
 
-      updateBackground(tempC < 10); // true = bad weather
-
+      updateBackground(currentTempC < 10);
       cityInput.value = "";
     })
     .catch((err) => {
@@ -57,7 +123,7 @@ document.querySelector(".hero-search").addEventListener("submit", (e) => {
       alertsContainer.innerHTML = `<div class="alert alert-critical">⚠️ Error fetching weather data.</div>`;
     });
 
-  // 📢 WEATHER ALERTS
+  // Fetch weather alerts
   fetch(`https://api.weatherapi.com/v1/alerts.json?key=${apiKey}&q=${city}`)
     .then((res) => {
       if (!res.ok) throw new Error("Alert API error");
@@ -79,27 +145,12 @@ document.querySelector(".hero-search").addEventListener("submit", (e) => {
       } else {
         alerts.forEach((alert) => {
           const alertBox = document.createElement("div");
-          const severity = alert.severity?.toLowerCase() || "unknown";
           const timeRemaining = alert.expires
             ? `${getHoursRemaining(alert.expires)}h remaining`
             : "";
 
-          // 🟡 wuxu display dhahayaa weather severity based on color----look css
-          //
-          let className = "alert-low";
-          if (severity.includes("extreme")) {
-            className = "alert-critical";
-          } else if (severity.includes("severe")) {
-            className = "alert-high";
-          } else if (
-            severity.includes("moderate") ||
-            severity.includes("watch") ||
-            severity.includes("advisory")
-          ) {
-            className = "alert-moderate";
-          }
+          alertBox.className = "alert alert-critical";
 
-          alertBox.className = `alert ${className}`;
           alertBox.innerHTML = `
             <div>
               <h3>${alert.headline}</h3>
@@ -108,6 +159,23 @@ document.querySelector(".hero-search").addEventListener("submit", (e) => {
             </div>
             ${timeRemaining ? `<div class="time-remaining">${timeRemaining}</div>` : ""}
           `;
+
+          // Find matching safety tips
+          const match = Object.keys(safetyData).find(key =>
+            alert.event.toLowerCase().includes(
+              key.toLowerCase().replace(/ warning/g, "").replace(/ alert/g, "")
+            )
+          );
+
+          if (match) {
+            const tipsList = document.createElement("ul");
+            safetyData[match].forEach((tip) => {
+              const li = document.createElement("li");
+              li.textContent = tip;
+              tipsList.appendChild(li);
+            });
+            alertBox.appendChild(tipsList);
+          }
 
           alertsContainer.appendChild(alertBox);
         });
@@ -118,3 +186,23 @@ document.querySelector(".hero-search").addEventListener("submit", (e) => {
       alertsContainer.innerHTML = `<div class="alert alert-critical">⚠️ Unable to fetch alerts at the moment.</div>`;
     });
 });
+
+// Hover to temporarily switch to Celsius
+temperature.addEventListener("mouseover", () => {
+  if (currentTempC === null || currentWindKph === null) return;
+
+  temperature.textContent = `${currentTempC}°C`;
+  wind.textContent = `${currentWindKph} kph`;
+});
+
+// Mouse out to switch back to Fahrenheit
+temperature.addEventListener("mouseout", () => {
+  if (currentTempC === null || currentWindKph === null) return;
+
+  const tempF = (currentTempC * 9/5) + 32;
+  const windMph = currentWindKph / 1.609;
+
+  temperature.textContent = `${tempF.toFixed(1)}°F`;
+  wind.textContent = `${windMph.toFixed(1)} mph`;
+});
+

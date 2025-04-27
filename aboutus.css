@@ -1,0 +1,108 @@
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #121212;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: #0077ff;
+    }
+
+    .team {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .member {
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .member:last-child {
+      border-bottom: none;
+    }
+
+    .member img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #0077ff;
+    }
+
+    .member-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .member-name {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #22c55e;
+    }
+
+    .member-role {
+      background-color: #0077ff;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      border-radius: 12px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    .member-title {
+      font-size: 1rem;
+      color: #ccc;
+      margin-top: 0.3rem;
+    }
+
+    .social-links {
+      margin-top: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .social-links a {
+      color: #0077ff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #22c55e;
+    }
+
+    @media (max-width: 600px) {
+      .member {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .member img {
+        margin-bottom: 0.5rem;
+      }
+    }

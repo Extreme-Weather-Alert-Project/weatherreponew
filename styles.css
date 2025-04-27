@@ -248,4 +248,89 @@
   color: #eee;
 }
 
-  
+  /* new info */
+  /* Style for safety tips list under alerts */
+/* Style for safety tips list under alerts */
+.alert ul {
+  margin-top: 10px;
+  padding-left: 0; /* No indent */
+  list-style-type: none; /* No bullets at all */
+}
+
+.alert ul li {
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #f8f8f8; /* Light text color for readability */
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle line between tips */
+}
+
+/* Optional: last item shouldn't have a border */
+.alert ul li:last-child {
+  border-bottom: none;
+}
+
+/* Optional: background behind tips */
+.alert ul {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 10px 15px;
+}
+#temperature {
+  cursor: pointer;
+}
+#temperature:hover {
+  color: #0077ff;
+  transition: color 0.3s ease;
+}
+@media (max-width: 768px) {
+  /* For tablets and phones */
+
+  .hero-search {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search-bar {
+    width: 90%; /* Make search bar smaller */
+    padding: 0.5rem;
+  }
+
+  .current-conditions,
+  .alerts-section {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .conditions-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .condition-card {
+    min-width: 150px;
+    width: 80%;
+  }
+
+  .header-content {
+    padding: 1rem;
+  }
+
+  .logo-container {
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+
+  .app-title {
+    font-size: 1rem;
+  }
+
+  .current-conditions h2 {
+    font-size: 1.4rem;
+  }
+
+  #temperature {
+    font-size: 2rem;
+  }
+}

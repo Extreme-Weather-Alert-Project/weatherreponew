@@ -84,107 +84,120 @@ function getHoursRemaining(expires) {
   return Math.ceil(diff / (1000 * 60 * 60));
 }
 
-// function updateBackground(isBadWeather) {
-//   const bgUrl = isBadWeather ? badWeatherBg : goodWeatherBg;
-//   document.getElementById("background-overlay").style.backgroundImage = `url('${bgUrl}')`;
-// }
+function updateBackground(isBadWeather) {
+  const bgUrl = isBadWeather ? badWeatherBg : goodWeatherBg;
+  document.getElementById("background-overlay").style.backgroundImage = `url('${bgUrl}')`;
+}
 
-// Submit search form
-document.querySelector(".hero-search").addEventListener("submit", (e) => {
+document.querySelector(".hero-search").addEventListener("submit", async (e) => {
   e.preventDefault();
-  alertsContainer.innerHTML = "";
 
   const city = cityInput.value.trim();
   if (!city) return;
 
-  // Fetch current weather
-  fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`)
-    .then((res) => {
-      if (!res.ok) throw new Error("Weather API error");
-      return res.json();
-    })
-    .then((data) => {
-      currentTempC = data.current.temp_c;
-      currentWindKph = data.current.wind_kph;
+  // Show loading while fetching
+  alertsContainer.innerHTML = `
+    <div class="loading">
+      <i class="fa fa-spinner fa-spin"></i> Loading...
+    </div>
+  `;
 
-      const tempF = (currentTempC * 9/5) + 32;
-      const windMph = currentWindKph / 1.609;
+  try {
+    // Fetch current weather
+    const weatherRes = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`);
+    if (!weatherRes.ok) throw new Error("Weather API error");
+    const weatherData = await weatherRes.json();
 
-      cityName.textContent = `${data.location.name}, ${data.location.country}`;
-      temperature.textContent = `${tempF.toFixed(1)}°F`; // Default to Fahrenheit
-      humidity.textContent = data.current.humidity + "%";
-      wind.textContent = `${windMph.toFixed(1)} mph`;    // Default to mph
+    currentTempC = weatherData.current.temp_c;
+    currentWindKph = weatherData.current.wind_kph;
 
-      updateBackground(currentTempC < 10);
-      cityInput.value = "";
-    })
-    .catch((err) => {
-      console.error("Weather fetch error:", err);
-      alertsContainer.innerHTML = `<div class="alert alert-critical">⚠️ Error fetching weather data.</div>`;
-    });
+    const tempF = (currentTempC * 9/5) + 32;
+    const windMph = currentWindKph / 1.609;
 
-  // Fetch weather alerts
-  fetch(`https://api.weatherapi.com/v1/alerts.json?key=${apiKey}&q=${city}`)
-    .then((res) => {
-      if (!res.ok) throw new Error("Alert API error");
-      return res.json();
-    })
-    .then((data) => {
-      const alerts = data.alerts?.alert || [];
-      alertsContainer.innerHTML = "";
+    cityName.textContent = `${weatherData.location.name}, ${weatherData.location.country}`;
+    temperature.textContent = `${tempF.toFixed(1)}°F`;
+    humidity.textContent = weatherData.current.humidity + "%";
+    wind.textContent = `${windMph.toFixed(1)} mph`;
 
-      if (alerts.length === 0) {
-        alertsContainer.innerHTML = `
-          <div class="box">
-            <div class="clear">
-              <i class="fa fa-check" aria-hidden="true"></i>
-            </div>
-            <p>All Clear</p>
+    updateBackground(currentTempC < 10);
+    cityInput.value = "";
+
+  } catch (err) {
+    console.error("Weather fetch error:", err);
+    alertsContainer.innerHTML = `<div class="alert alert-critical">⚠️ Error fetching weather data.</div>`;
+    return;
+  }
+
+  try {
+    // Fetch weather alerts
+    const alertRes = await fetch(`https://api.weatherapi.com/v1/alerts.json?key=${apiKey}&q=${city}`);
+    if (!alertRes.ok) throw new Error("Alert API error");
+    const alertData = await alertRes.json();
+
+    const alerts = alertData.alerts?.alert || [];
+
+    // Clear loading once data is ready
+    alertsContainer.innerHTML = "";
+
+    if (alerts.length === 0) {
+      alertsContainer.innerHTML = `
+        <div class="box">
+          <div class="clear">
+            <i class="fa fa-check" aria-hidden="true"></i>
           </div>
+          <p>All Clear</p>
+        </div>
+      `;
+    } else {
+      const seenHeadlines = new Set();
+
+      alerts.forEach((alert) => {
+        if (seenHeadlines.has(alert.headline)) {
+          return;
+        }
+        seenHeadlines.add(alert.headline);
+
+        const alertBox = document.createElement("div");
+        const timeRemaining = alert.expires
+          ? `${getHoursRemaining(alert.expires)}h remaining`
+          : "";
+
+        alertBox.className = "alert alert-critical";
+        alertBox.innerHTML = `
+          <div>
+            <h3>${alert.headline}</h3>
+            <p>${alert.desc}</p>
+            <p><small>Region: ${alert.areaDesc}</small></p>
+          </div>
+          ${timeRemaining ? `<div class="time-remaining">${timeRemaining}</div>` : ""}
         `;
-      } else {
-        alerts.forEach((alert) => {
-          const alertBox = document.createElement("div");
-          const timeRemaining = alert.expires
-            ? `${getHoursRemaining(alert.expires)}h remaining`
-            : "";
 
-          alertBox.className = "alert alert-critical";
+        const match = Object.keys(safetyData).find(key =>
+          alert.event.toLowerCase().includes(
+            key.toLowerCase().replace(/ warning/g, "").replace(/ alert/g, "")
+          )
+        );
 
-          alertBox.innerHTML = `
-            <div>
-              <h3>${alert.headline}</h3>
-              <p>${alert.desc}</p>
-              <p><small>Region: ${alert.areaDesc}</small></p>
-            </div>
-            ${timeRemaining ? `<div class="time-remaining">${timeRemaining}</div>` : ""}
-          `;
+        if (match) {
+          const tipsList = document.createElement("ul");
+          safetyData[match].forEach((tip) => {
+            const li = document.createElement("li");
+            li.textContent = tip;
+            tipsList.appendChild(li);
+          });
+          alertBox.appendChild(tipsList);
+        }
 
-          // Find matching safety tips
-          const match = Object.keys(safetyData).find(key =>
-            alert.event.toLowerCase().includes(
-              key.toLowerCase().replace(/ warning/g, "").replace(/ alert/g, "")
-            )
-          );
-
-          if (match) {
-            const tipsList = document.createElement("ul");
-            safetyData[match].forEach((tip) => {
-              const li = document.createElement("li");
-              li.textContent = tip;
-              tipsList.appendChild(li);
-            });
-            alertBox.appendChild(tipsList);
-          }
-
-          alertsContainer.appendChild(alertBox);
-        });
-      }
-    })
-    .catch((error) => {
-      console.error("Alerts fetch error:", error);
-      alertsContainer.innerHTML = `<div class="alert alert-critical">⚠️ Unable to fetch alerts at the moment.</div>`;
-    });
+        alertsContainer.appendChild(alertBox);
+      });
+    }
+  } catch (error) {
+    console.error("Alerts fetch error:", error);
+    const errorMsg = document.createElement("div");
+    errorMsg.className = "alert alert-warning";
+    errorMsg.innerHTML = `⚠️ Unable to fetch alerts at the moment.`;
+    alertsContainer.appendChild(errorMsg);
+  }
 });
 
 // Hover to temporarily switch to Celsius
@@ -205,4 +218,3 @@ temperature.addEventListener("mouseout", () => {
   temperature.textContent = `${tempF.toFixed(1)}°F`;
   wind.textContent = `${windMph.toFixed(1)} mph`;
 });
-

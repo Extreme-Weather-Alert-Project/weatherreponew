@@ -69,4 +69,13 @@ p {
   padding: 40px 20px;
 }
 
+.goBack{
+text-align: center;
+margin: 20px;
+padding: 20px 20px;
+}
 
+.goBack :hover{
+  cursor: pointer;
+
+}

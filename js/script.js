@@ -9,7 +9,7 @@ const alertsContainer = document.querySelector(".alerts-section");
 const cityName = document.querySelector("#cityName");
 
 const goodWeatherBg = "image/weather-image.avif";
-const badWeatherBg = "image/weather-12.jpeg";
+const badWeatherBg = "image/cold-image.jpg";
 
 const safetyData = {
   "Severe Thunderstorm Warning": [

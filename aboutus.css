@@ -65,7 +65,7 @@ p {
   color: #666;
 }
 .about-us {
-  background-color: #e0f7fa; /* light blue background */
+  background-color: #e0f7fa; 
   padding: 40px 20px;
 }
 
@@ -83,3 +83,25 @@ font-family: Arial, Helvetica, sans-serif;
 
 
 }
+.go-back-button {
+  display: inline-block;
+  margin: 20px;
+  padding: 10px 20px;
+  background-color: #0077ff;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 25px;
+  transition: background-color 0.3s, transform 0.2s;
+  font-size: 16px;
+}
+
+.go-back-button:hover {
+  background-color: #005fcc;
+  transform: translateY(-2px);
+}
+
+.go-back-button i {
+  margin-right: 8px; 
+}
+

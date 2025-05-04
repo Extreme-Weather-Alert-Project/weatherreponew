@@ -167,7 +167,7 @@ document.querySelector(".hero-search").addEventListener("submit", async (e) => {
           <div>
             <h3>${alert.headline}</h3>
             <p>${alert.desc}</p>
-            <p><small>Region: ${alert.areaDesc}</small></p>
+            <p><small> Areas: ${alert.areas}</small></p>
           </div>
           ${timeRemaining ? `<div class="time-remaining">${timeRemaining}</div>` : ""}
         `;
